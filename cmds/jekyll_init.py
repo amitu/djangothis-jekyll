@@ -1,12 +1,34 @@
 from django.core.management.base import NoArgsCommand
 from djangothis.path import path
 
-from _theme import create_post, create_page # dunno abt _theme name
+from _theme.cmds import create_post, create_page # dunno abt _theme name
 
 config_yaml = """
+author:
+    name: <your name>
+    twitter: <twitter_handle>
+    github: <github_handle>
+    email: <email>
+
+site:
+    title: <your name>
+    production_url: <final url>
+
+TEMPLATE_CONTEXT_PROCESSORS:
+    - django.core.context_processors.request
+    - django.contrib.auth.context_processors.auth
+    - _theme.views.context_processor
 """
 
 index_html = """
+<ul class="posts">
+    {% for post in posts %}
+        <li>
+            <span>{{ post.date|date:"d M Y"}}</span> &raquo; 
+            <a href="{{ post.url }}">{{ post.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
 """
 
 dummy_post_md = """
@@ -28,7 +50,7 @@ class Command(NoArgsCommand):
         if path("index.html").exists():
             print "index.html exists, skipping."
         else:
-            create_page(index_html)
+            create_page(url="index.html", title="Blog", content=index_html)
 
         # archive, tags, categories etc will be handled by views.py in future.
         # create _posts with one dummy post

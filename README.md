@@ -55,3 +55,10 @@ $ djangothis gunicorn # instead of just "djangothis" to run server
 And then mirror the site using wget.
 
 Enjoy.
+
+#### Attribution
+
+This theme is based on excellent work Yuya Saito, and all other credit
+goes to
+[jekyllbootstrap](https://github.com/jekyllbootstrap/theme-the-program).
+

@@ -10,7 +10,11 @@ def get_posts():
     global posts
     if posts is not None: return posts
     posts = []
-    for post in path(dotslash("_posts")).walkfiles():
+
+    _posts = path(dotslash("_posts"))
+    if not _posts.exists(): return posts
+
+    for post in _posts.walkfiles():
         if post.endswith(".swp"): continue
         watchfile(post)
         content = post.open().read()
