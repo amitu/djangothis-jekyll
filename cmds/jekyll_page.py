@@ -7,10 +7,6 @@ from _theme.cmds import create_page
 class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
         make_option(
-            '--title',
-            help='Title Of The Page'
-        ),
-        make_option(
             '--url',
             help='URL Of The Page'
         ),
@@ -18,7 +14,11 @@ class Command(BaseCommand):
     help = 'Create a new page'
 
     def handle(self, *args, **options):
-        if not (options["title"] and options["url"]):
-            raise CommandError("Both --title and --url are required")
-        create_page(title=options["title"], url=options["url"], content="")
+        if len(args) == 0:
+            raise CommandError("Title of page required.")
+        title = " ".join(args)
+        title = title.strip()
+        if not options["url"]:
+            raise CommandError("--url is required.")
+        create_page(title=title, url=options["url"], content="")
 

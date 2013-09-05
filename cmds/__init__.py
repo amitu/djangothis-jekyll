@@ -1,10 +1,13 @@
-from string import Template
-from djangothis.path import path
 from django.core.management.base import CommandError
+from django.template.defaultfilters import slugify
+
+from string import Template
+from datetime import date
+
+from djangothis.path import path
 
 post_template = Template(
-"""
----
+"""---
 layout: post
 title: "$title"
 ---
@@ -16,8 +19,12 @@ $content
 )
 
 def create_post(title, content=""):
-    # TODO: get file url from today and title slug
-    pth = ""
+    today = date.today()
+    pth = "_posts/%s-%02d-%02d-%s.md" % (
+        today.year, today.month, today.day, slugify(title)
+    )
+    if not path("_posts").exists():
+        path("_posts").mkdirs()
     if path(pth).exists():
         raise CommandError("Post already exists")
     content = post_template.substitute(title=title, content=content)
