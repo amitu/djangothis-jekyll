@@ -55,6 +55,10 @@ $ djangothis gunicorn # instead of just "djangothis" to run server
 
 And then mirror the site using wget.
 
+```shell
+$ wget -m http://localhost:8000
+```
+
 Enjoy.
 
 #### Attribution
