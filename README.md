@@ -3,13 +3,15 @@ A jekyll like theme for
 
 Sample site: [amitu.com](http://amitu.com)
 
+#### How to setup your blog
+
 ```shell
 $ mkdir blog
 $ cd blog
 $ pip install djangothis
 $ git clone git@github.com:amitu/djangothis-jekyll.git _theme
 
-$ # creates config.yaml, index.html, _posts
+$ # creates config.yaml, index.html, _posts, and sample post
 $ djangothis jekyll_init
 All Done.
 Run "djangothis jekyll_post" or "djangothis jekyll_page".
@@ -26,14 +28,14 @@ Quit the server with CONTROL-C.
 To create a new page run:
 
 ```shell
-$ djanogthis jekyll_page --title="Hello world" --url="/hello-world/"
+$ djanogthis jekyll_page --url="/hello-world/" Hello World
 hello-world/index.html created.
 ```
 
 To create a new post:
 
 ```shell
-$ djangothis jekyll_post --title="This is a new post"
+$ djangothis jekyll_post This is a new post
 _post/2013-09-02-this-is-a-new-post.md created.
 ```
 
