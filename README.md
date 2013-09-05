@@ -1,8 +1,7 @@
 A jekyll like theme for
 [djangothis](https://github.com/amitu/djangothis).
 
-NOTE: The following is sketch of how it will work, not everything is
-done yet.
+Sample site: [amitu.com](http://amitu.com)
 
 ```shell
 $ mkdir blog
