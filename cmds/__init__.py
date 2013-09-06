@@ -24,7 +24,7 @@ def create_post(title, content=""):
         today.year, today.month, today.day, slugify(title)
     )
     if not path("_posts").exists():
-        path("_posts").mkdirs()
+        path("_posts").makedirs()
     if path(pth).exists():
         raise CommandError("Post already exists")
     content = post_template.substitute(title=title, content=content)
@@ -54,7 +54,8 @@ def create_page(title, url, content=""):
         url += ".html"
     if path(url).exists():
         raise CommandError("%s already exists." % url)
-    path(url).parent.makedirs()
+    if path(url).parent:
+        path(url).parent.makedirs()
     content = page_template.substitute(title=title, content=content)
     file(url, "w").write(content)
     print url, "created."
