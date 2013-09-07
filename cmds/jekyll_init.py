@@ -32,11 +32,6 @@ index_html = """
 """
 
 dummy_post_md = """
----
-layout: post
-title:  "Welcome to Jekyll!"
----
-
 You'll find this post in your `_posts` directory - edit this post To add new
 posts:
 
@@ -50,7 +45,7 @@ djangothis also offers powerful support for code snippets:
 def print_hi(name):
   print "Hi", name
 
-print_hi("Amit")
+print_hi("Tom")
 
 # prints 'Hi, Tom' to STDOUT.
 {% endhighlight %}
@@ -87,5 +82,7 @@ class Command(NoArgsCommand):
             create_post(dummy_post_title, dummy_post_md)
 
         print 'All Done.'
-        print 'Run "djangothis jekyll_post" or "djangothis jekyll_page".'
+        print 'Run "djangothis jekyll_post" or "djangothis jekyll_page" to'
+        print 'create new blog post or page.'
+        print 'Run "djangothis" to start server.'
 
