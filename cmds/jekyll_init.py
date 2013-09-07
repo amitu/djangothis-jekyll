@@ -11,7 +11,7 @@ author:
     email: <email>
 
 site:
-    title: <your name>
+    name: Your New djangothis Site
     production_url: <final url>
 
 TEMPLATE_CONTEXT_PROCESSORS:
@@ -24,7 +24,7 @@ index_html = """
 <ul class="posts">
     {% for post in posts %}
         <li>
-            <span>{{ post.date|date:"d M Y"}}</span> &raquo; 
+            <span>{{ post.date|date:"d M Y"}}</span> &raquo;
             <a href="{{ post.url }}">{{ post.title }}</a>
         </li>
     {% endfor %}
@@ -32,9 +32,36 @@ index_html = """
 """
 
 dummy_post_md = """
+---
+layout: post
+title:  "Welcome to Jekyll!"
+---
+
+You'll find this post in your `_posts` directory - edit this post To add new
+posts:
+
+{% highlight shell %}
+$ djangothis jekyll_post "Title of the post"
+{% endhighlight %}
+
+djangothis also offers powerful support for code snippets:
+
+{% highlight python %}
+def print_hi(name):
+  print "Hi", name
+
+print_hi("Amit")
+
+# prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
+
+Check out the [djanogthis docs][https://github.com/amitu/djangothis] for more
+info on how to get the most out of djangothis. File all bugs/feature requests
+at [djanogthis's GitHub repo][https://github.com/amitu/djangothis/issues].
+
 """
 
-dummy_post_title = ""
+dummy_post_title = "Welcome To djangothis!"
 
 class Command(NoArgsCommand):
     help = 'Initialize basic files and folders'
@@ -61,3 +88,4 @@ class Command(NoArgsCommand):
 
         print 'All Done.'
         print 'Run "djangothis jekyll_post" or "djangothis jekyll_page".'
+
