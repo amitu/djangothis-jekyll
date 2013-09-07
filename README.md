@@ -9,7 +9,7 @@ Sample site: [amitu.com](http://amitu.com)
 $ mkdir blog
 $ cd blog
 $ pip install djangothis
-$ git clone git@github.com:amitu/djangothis-jekyll.git _theme
+$ git clone https://github.com/amitu/djangothis-jekyll.git _theme
 
 $ # creates config.yaml, index.html, _posts, and sample post
 $ djangothis jekyll_init
