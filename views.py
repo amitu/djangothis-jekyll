@@ -6,16 +6,20 @@ from djangothis.app import dotslash, read_yaml, watchfile
 
 posts = None
 
+
 def get_posts():
     global posts
-    if posts is not None: return posts
+    if posts is not None:
+        return posts
     posts = []
 
     _posts = path(dotslash("_posts"))
-    if not _posts.exists(): return posts
+    if not _posts.exists():
+        return posts
 
     for post in _posts.walkfiles():
-        if post.endswith(".swp"): continue
+        if post.endswith(".swp"):
+            continue
         watchfile(post)
         content = post.open().read()
         _, header, body = content.split("---", 2)
@@ -23,9 +27,10 @@ def get_posts():
         header = read_yaml(header)
         y, m, d, slug = post.basename().split("-", 3)
         slug = slug[:-3]
+        url = header.get("url", "/%s/%s/%s/" % (y, m, slug))
         posts.append({
             "date": datetime(int(y), int(m), int(d)),
-            "url": "/%s/%s/%s/" % (y, m, slug),
+            "url": url,
             "title": header["title"],
             "header": header,
             "body": body,
@@ -33,11 +38,13 @@ def get_posts():
     posts.sort(lambda x, y: cmp(x["date"], y["date"]), reverse=True)
     return posts
 
+
 def context_processor(request):
     return {
         "settings": d.settings,
         "posts": get_posts(),
     }
+
 
 def find_post_by_path(pth):
     prev, curr, nex = None, None, None
@@ -49,10 +56,13 @@ def find_post_by_path(pth):
             curr = post
         else:
             prev = post
+    else:
+        raise d.Http404
     return prev, curr, nex
 
-@d("/<int4:year>/<int2:month>/<slug:slug>/")
-def post_page(request, year, month, slug):
+
+@d(".*")
+def post_page(request):
     prev, curr, nex = find_post_by_path(request.path)
     return "post.html", {
         "previosu": prev,
