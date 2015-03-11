@@ -34,6 +34,7 @@ def get_posts():
             "title": header["title"],
             "header": header,
             "body": body,
+            "section": header.get("section", ""),
         })
     posts.sort(lambda x, y: cmp(x["date"], y["date"]), reverse=True)
     return posts
