@@ -57,7 +57,7 @@ def find_post_by_path(pth):
             curr = post
         else:
             prev = post
-    else:
+    if not curr:
         raise d.Http404
     return prev, curr, nex
 
